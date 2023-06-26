@@ -23,13 +23,7 @@ void insertion_sort(long long a[], int n)
             a[j + 1] = a[j];
             j--;
         }
-        j++;
-        if (ele != a[j])
-        {
-            long long temp = a[j];
-            a[j] = ele;
-            ele = temp;
-        }
+        a[j+1]=ele;
     }
 }
 void print_array(long long a[], int n)
