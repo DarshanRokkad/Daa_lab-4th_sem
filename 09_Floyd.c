@@ -62,7 +62,7 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            printf("%d ", w[i][j]);
+            printf("%d ", d[i][j]);
         }
         printf("\n");
     }
@@ -78,13 +78,13 @@ Enter the cost matrix :
 0 999 3 999
 2 0 999 999 
 999 7 0 1
-6 999 999 0 
+6 999 999 0
 
 All pair shortest path matrix is : 
-0 999 3 999 
-2 0 999 999 
-999 7 0 1 
-6 999 999 0 
+0 10 3 4 
+2 0 5 6 
+7 7 0 1 
+6 16 9 0 
 
 The run time is 0.000000
 

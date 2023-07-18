@@ -11,7 +11,7 @@ a graph of the time taken versus n. (n=no of elements).
 #include<stdlib.h>
 #include<time.h>
 
-int partition(int a[] , int n , int low ,int high)
+int partition(int a[] , int low ,int high)
 {
     int pivot = a[low];
     int i = low + 1 ;
@@ -42,13 +42,13 @@ int partition(int a[] , int n , int low ,int high)
     }
 }
 
-void quick_sort(int a[],int n,int low , int high)
+void quick_sort(int a[],int low , int high)
 {
     if(low<high)
     {
-        int j = partition(a,n,low,high);
-        quick_sort(a,n,low,j-1);
-        quick_sort(a,n,j+1,high);
+        int j = partition(a,low,high);
+        quick_sort(a,low,j-1);
+        quick_sort(a,j+1,high);
     }
 }
 
@@ -76,7 +76,7 @@ int main()
     print_array(a,n);
 
     clock_t start = clock();
-    quick_sort(a,n,0,n-1);
+    quick_sort(a,0,n-1);
     clock_t end = clock();
     double clk = (double)(end-start)/CLOCKS_PER_SEC;
 
