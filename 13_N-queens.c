@@ -59,6 +59,7 @@ int main()
     return 0;
 }
 
+
 /* Sample input and output
 
 Enter number of queeens : 4

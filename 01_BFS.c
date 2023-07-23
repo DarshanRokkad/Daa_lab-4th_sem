@@ -68,6 +68,7 @@ int main()
     return 0;
 }
 
+
 /* Sample input and output
 
 Enter number of vertices : 5

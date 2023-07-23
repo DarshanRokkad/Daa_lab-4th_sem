@@ -132,6 +132,7 @@ int main()
     return 0;
 }
 
+
 /* Sample input and output
 
 Enter the number of vertices : 6

@@ -117,6 +117,7 @@ int main()
     return 0;
 }
 
+
 /* Sample input and output
 
 Enter the text in which pattern is to be searched : TTATAGATCTCGTATTCTTTTATAGATCTCCTATTCTT
