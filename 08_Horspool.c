@@ -124,5 +124,6 @@ Enter the pattern to be searched : TCCTATTCTT
 Length of text : 38
 Length of pattern : 10
 The desired pattern was found starting from position : 29
+The desired pattern was found starting from position : 29
 
 */
