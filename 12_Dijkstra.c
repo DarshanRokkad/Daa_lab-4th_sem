@@ -16,12 +16,13 @@ int choose(int n, int dist[], int selected[])
     int j = 1, min = 100;
     for (int i = 1; i <= n; i++)
     {
-        if ((dist[i] < min) && (selected[i] == 0))
+        if ((dist[i] < min) && (!selected[i]))
         {
             min = dist[i];
             j = i;
         }
     }
+    // returning the index of minimum distance vertex form source  
     return j;
 }
 
