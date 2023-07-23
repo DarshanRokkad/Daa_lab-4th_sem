@@ -11,25 +11,27 @@ distinct solutions to the N-queens puzzle. Note: Use Backtracking technique.
 #define TRUE 1
 
 int x[20];
-int place(int k, int i)
+int can_place(int k_th_queeen, int position)
 {
-    for (int j = 1; j <= k; j++)
+    for (int j = 1; j <= k_th_queeen; j++)
     {
-        if ((x[j] == i) || (abs(x[j] - i) == abs(j - k)))
+        // first check wheather any queen is placed in that column 
+        // next check wheather any queen can attack from daigonal
+        if ((x[j] == position) || (abs(x[j] - position) == abs(j - k_th_queeen)))
             return FALSE;
     }
     return TRUE;
 }
 
-void n_queens(int k, int no_queens)
+void n_queens(int k_th_queeen, int no_queens)
 {
-    for (int i = 1; i <= no_queens; i++)
+    for (int position = 1; position <= no_queens; position++)
     {
-        if (place(k, i))
+        if (can_place(k_th_queeen, position))
         {
-            x[k] = i;
-            // if all queens are places then print the position else place next queen remaining
-            if (k == no_queens)
+            x[k_th_queeen] = position;
+            // if all queens are places then print the positionition else place next queen remaining
+            if (k_th_queeen == no_queens)
             {
                 for (int a = 1; a <= no_queens; a++)
                 {
@@ -39,7 +41,8 @@ void n_queens(int k, int no_queens)
             }
             else
             {
-                n_queens(k + 1, no_queens);
+                // placing next queen 
+                n_queens(k_th_queeen + 1, no_queens);
             }
         }
     }
