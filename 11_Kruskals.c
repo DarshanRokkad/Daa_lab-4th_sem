@@ -8,8 +8,6 @@ minimum cost. Write an algorithm by applying Kruskal’s method to find
 the minimum spanning tree for the given scenario.
 */
 
-// INCOMPLETE 
-
 #include <stdio.h>
 #include <time.h>
 
@@ -27,25 +25,25 @@ int find(int v, int parent[])
     return v;
 }
 
-void union_ij(int i, int j, int parent[])
+void union_ij(int u, int v, int parent[])
 {
-    if (i < j)
+    if (u < v)
     {
-        parent[j] = i;
+        parent[v] = u;
     }
     else
     {
-        parent[i] = j;
+        parent[u] = v;
     }
 }
 
-void kruskal(int no_vertex, edge e[], int no_edges)
+void kruskal(int no_vertices, edge e[], int no_edges)
 {
     for (int i = 0; i < no_edges; i++)
     {
         for (int j = 0; j < no_edges - 1; j++)
         {
-            if (e[j].cost > e[j + 1].cost)
+            if (e[j + 1].cost < e[j].cost)
             {
                 // swap the edge
                 edge temp;
@@ -59,19 +57,22 @@ void kruskal(int no_vertex, edge e[], int no_edges)
                 e[j].cost = e[j + 1].cost;
 
                 e[j + 1].u = temp.u;
+                e[j + 1].v = temp.v;
                 e[j + 1].cost = temp.cost;
             }
         }
     }
-    int parent[no_vertex];
-    for (int i = 0; i < no_vertex; i++)
+
+    int parent[no_vertices];
+    for (int i = 0; i < no_vertices; i++)
     {
         parent[i] = i;
     }
+
     int count = 0, p = 0, sum = 0;
-    int t[no_vertex][no_vertex];
+    int result[no_vertices][no_vertices];
     int u, v, i, j, k;
-    while (count <= no_vertex - 1)
+    while (count != no_vertices - 1)
     {
         u = e[p].u;
         v = e[p].v;
@@ -79,22 +80,23 @@ void kruskal(int no_vertex, edge e[], int no_edges)
         j = find(v, parent);
         if (i != j)
         {
-            t[k][0] = u;
-            t[k][1] = v;
-            k++;
             count++;
+            result[k][0] = u;
+            result[k][1] = v;
+            k++;
             sum += e[p].cost;
             union_ij(i, j, parent);
         }
         p++;
     }
-    if (count == no_vertex - 1)
+
+    if (count == no_vertices - 1)
     {
         printf("Spanning tree exists\n");
         printf("The spanning tree is as follows:\n");
-        for (i = 0; i < no_vertex - 1; i++)
+        for (i = 0; i < no_vertices - 1; i++)
         {
-            printf("%d  %d\t", t[i][0], t[i][1]);
+            printf("%d  %d\t", result[i][0], result[i][1]);
         }
         printf("\nThe cost of the spanning tree is %d\n", sum);
     }
@@ -103,11 +105,12 @@ void kruskal(int no_vertex, edge e[], int no_edges)
         printf("\n spanning tree does not exist");
     }
 }
+
 int main()
 {
-    int no_vertex, no_edges;
+    int no_vertices, no_edges;
     printf("Enter the number of vertices : ");
-    scanf("%d", &no_vertex);
+    scanf("%d", &no_vertices);
 
     printf("Enter the number of edges : ");
     scanf("%d", &no_edges);
@@ -120,11 +123,11 @@ int main()
     }
 
     clock_t start = clock();
-    kruskal(no_vertex, e, no_edges);
+    kruskal(no_vertices, e, no_edges);
     clock_t end = clock();
     double clk = (end - start) / CLOCKS_PER_SEC;
 
-    printf("\nThe run time is %f\n", clk);
+    printf("The run time is %f\n", clk);
 
     return 0;
 }
@@ -132,10 +135,10 @@ int main()
 /* Sample input and output
 
 Enter the number of vertices : 6
-Enter the number of edges: 10
-Enter the edge list( u  v  cost)
+Enter the number of edges : 10
+Enter the edge list (u,v,cost) : 
 0 1 3
-1 2 1 
+1 2 1
 2 3 6
 3 4 8
 4 0 6
@@ -143,12 +146,11 @@ Enter the edge list( u  v  cost)
 1 5 4
 2 5 4
 3 5 5
-4 5 2
+4 5 2 
 Spanning tree exists
 The spanning tree is as follows:
-0 1 	1 2	15	35	4 5
-The cost of the spanning tree is 
-16
-The time taken is 0.655643
+1  2    4  5    0  1    1  5    3  5
+The cost of the spanning tree is 15
+The run time is 0.000000
 
 */
