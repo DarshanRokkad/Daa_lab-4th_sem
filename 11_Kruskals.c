@@ -37,10 +37,10 @@ void union_ij(int u, int v, int parent[])
     }
 }
 
-void kruskal(int no_vertices, edge e[], int no_edges)
+void kruskal(int no_vertices, int no_edges, edge e[])
 {
-    // bubble sort of edges 
-    for (int i = 0; i < no_edges; i++)
+    // bubble sort of edges
+    for (int i = 1; i < no_edges; i++)
     {
         for (int j = 0; j < no_edges - i; j++)
         {
@@ -64,42 +64,44 @@ void kruskal(int no_vertices, edge e[], int no_edges)
         }
     }
 
+    // creating parent 
     int parent[no_vertices];
     for (int i = 0; i < no_vertices; i++)
     {
         parent[i] = i;
     }
 
-    int count = 0, p = 0, sum = 0;
-    int result[no_vertices][no_vertices];
-    int u, v, i, j, k;
+    // finding min spanning tree
+    int p = 0;
+    int result[no_vertices - 1][2], k = 0, count = 0, min_cost = 0;
     while (count != no_vertices - 1)
     {
-        u = e[p].u;
-        v = e[p].v;
-        i = find(u, parent);
-        j = find(v, parent);
+        int u = e[p].u;
+        int v = e[p].v;
+        int i = find(u, parent);
+        int j = find(v, parent);
         if (i != j)
         {
-            count++;
             result[k][0] = u;
             result[k][1] = v;
             k++;
-            sum += e[p].cost;
+            min_cost += e[p].cost;
             union_ij(i, j, parent);
+            count++;
         }
         p++;
     }
 
+    // printing results 
     if (count == no_vertices - 1)
     {
         printf("Spanning tree exists\n");
         printf("The spanning tree is as follows:\n");
-        for (i = 0; i < no_vertices - 1; i++)
+        for (int i = 0; i < no_vertices - 1; i++)
         {
             printf("%d  %d\t", result[i][0], result[i][1]);
         }
-        printf("\nThe cost of the spanning tree is %d\n", sum);
+        printf("\nThe cost of the spanning tree is %d\n", min_cost);
     }
     else
     {
@@ -124,7 +126,7 @@ int main()
     }
 
     clock_t start = clock();
-    kruskal(no_vertices, e, no_edges);
+    kruskal(no_vertices, no_edges, e);
     clock_t end = clock();
     double clk = (end - start) / CLOCKS_PER_SEC;
 
@@ -133,12 +135,11 @@ int main()
     return 0;
 }
 
-
 /* Sample input and output
 
 Enter the number of vertices : 6
 Enter the number of edges : 10
-Enter the edge list (u,v,cost) : 
+Enter the edge list (u,v,cost) :
 0 1 3
 1 2 1
 2 3 6
@@ -148,7 +149,7 @@ Enter the edge list (u,v,cost) :
 1 5 4
 2 5 4
 3 5 5
-4 5 2 
+4 5 2
 Spanning tree exists
 The spanning tree is as follows:
 1  2    4  5    0  1    1  5    3  5
