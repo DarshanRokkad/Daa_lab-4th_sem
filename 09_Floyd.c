@@ -76,7 +76,7 @@ int main()
 
 Enter number of vertices : 4
 Enter the cost matrix : 
-0 999 3 999
+0 999 3 999 
 2 0 999 999 
 999 7 0 1
 6 999 999 0

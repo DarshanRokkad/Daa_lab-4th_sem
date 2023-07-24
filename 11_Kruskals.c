@@ -39,9 +39,10 @@ void union_ij(int u, int v, int parent[])
 
 void kruskal(int no_vertices, edge e[], int no_edges)
 {
+    // bubble sort of edges 
     for (int i = 0; i < no_edges; i++)
     {
-        for (int j = 0; j < no_edges - 1; j++)
+        for (int j = 0; j < no_edges - i; j++)
         {
             if (e[j + 1].cost < e[j].cost)
             {
