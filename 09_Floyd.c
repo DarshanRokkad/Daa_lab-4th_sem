@@ -16,15 +16,9 @@ int min(int a, int b)
     return (a < b) ? a : b;
 }
 
-void floyd(int n, int w[n][n], int d[n][n])
+void floyd(int n, int d[n][n])
 {
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            d[i][j] = w[i][j];
-        }
-    }
+
     for (int k = 0; k < n; k++)
     {
         for (int i = 0; i < n; i++)
@@ -43,17 +37,17 @@ int main()
     printf("Enter number of vertices : ");
     scanf("%d", &n);
     printf("Enter the cost matrix : \n");
-    int w[n][n], d[n][n];
+    int d[n][n];
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            scanf("%d", &w[i][j]);
+            scanf("%d", &d[i][j]);
         }
     }
 
     clock_t start = clock();
-    floyd(n, w, d);
+    floyd(n, d);
     clock_t end = clock();
     double clk = (end - start) / CLOCKS_PER_SEC;
 
@@ -71,21 +65,20 @@ int main()
     return 0;
 }
 
-
 /* Sample input and output
 
 Enter number of vertices : 4
-Enter the cost matrix : 
-0 999 3 999 
-2 0 999 999 
+Enter the cost matrix :
+0 999 3 999
+2 0 999 999
 999 7 0 1
 6 999 999 0
 
-All pair shortest path matrix is : 
-0 10 3 4 
-2 0 5 6 
-7 7 0 1 
-6 16 9 0 
+All pair shortest path matrix is :
+0 10 3 4
+2 0 5 6
+7 7 0 1
+6 16 9 0
 
 The run time is 0.000000
 
